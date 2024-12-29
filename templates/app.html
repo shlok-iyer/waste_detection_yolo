@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>GARBAGE DETECTION USING YOLO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 align="center">GARBAGE DETECTION USING YOLO</h1>
+    <div class="container">
+        <div class="row">
+            <h2>Select a file to upload</h2>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+            {% if input_filename %}
+                <div>
+                    <h3>Uploaded Image:</h3>
+                    <img src="{{ url_for('static', filename='uploads/' + input_filename) }}" style="max-width: 100%; height: auto;">
+                </div>
+            {% endif %}
+            {% if output_filename %}
+                <div>
+                    <h3>Processed Image:</h3>
+                    <img src="{{ url_for('static', filename='outputs/' + output_filename) }}" style="max-width: 100%; height: auto;">
+                </div>
+            {% endif %}
+            <form method="post" action="/" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
